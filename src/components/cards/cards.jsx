@@ -20,7 +20,7 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
         >
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
-              Infected Count
+              Infected
             </Typography>
             <Typography variant="h5">
               <CountUp
@@ -47,7 +47,7 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
         >
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
-              Recovered Count
+              Recovered
             </Typography>
             <Typography variant="h5">
               <CountUp
@@ -74,7 +74,7 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
         >
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
-              Deaths Count
+              Deaths
             </Typography>
             <Typography variant="h5">
               <CountUp

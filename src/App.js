@@ -5,7 +5,7 @@ import { fetchData } from "../src/api";
 import coronaImage from "./images/coronaImage.png";
 import { DataStore } from "@aws-amplify/datastore";
 import { CovidReport } from "./models";
-import Authenticator from "./components/Authenticator";
+// import Authenticator from "./components/Authenticator";
 
 class App extends Component {
   state = {
@@ -20,18 +20,19 @@ class App extends Component {
     });
   }
 
-  async dataseed() {
+  dataseed = async (Recovered, Infected, Died, Country, lastUpdatedAt) => {
+    console.log(Country);
     const data = await DataStore.save(
       new CovidReport({
-        Recovered: 1020,
-        Infected: 1020,
-        Died: 1020,
-        Country: "Lorem ipsum dolor sit amet",
-        lastUpdatedAt: "1970-01-01T12:30:23.999Z",
+        Recovered,
+        Infected,
+        Died,
+        Country,
+        lastUpdatedAt,
       })
     );
     return data;
-  }
+  };
 
   handleCountryChange = async (country) => {
     //console.log(country)
@@ -41,13 +42,21 @@ class App extends Component {
       data: fetchCountryData,
       country: country,
     });
+
+    this.dataseed(
+      fetchCountryData.recovered.value,
+      fetchCountryData.confirmed.value,
+      fetchCountryData.deaths.value,
+      country,
+      fetchCountryData.lastUpdate
+    );
   };
 
   render() {
     const { data, country } = this.state;
     return (
       <div className={styles.container}>
-        <Authenticator />
+        {/* <Authenticator /> */}
         <img className={styles.image} src={coronaImage} alt="COVID-19" />
         <Cards data={data} />
         <CountryPicker handleCountryChange={this.handleCountryChange} />

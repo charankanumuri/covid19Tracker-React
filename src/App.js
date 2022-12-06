@@ -5,7 +5,7 @@ import { fetchData } from "../src/api";
 import coronaImage from "./images/coronaImage.png";
 import { DataStore } from "@aws-amplify/datastore";
 import { CovidReport } from "./models";
-// import Authenticator from "./components/Authenticator";
+import Authenticator from "./components/Authenticator";
 import { Amplify } from "aws-amplify";
 import "@aws-amplify/ui-react/styles.css";
 
@@ -60,7 +60,7 @@ class App extends Component {
     const { data, country } = this.state;
     return (
       <div className={styles.container}>
-        {/* <Authenticator /> */}
+        <Authenticator />
         <img className={styles.image} src={coronaImage} alt="COVID-19" />
         <Cards data={data} />
         <CountryPicker handleCountryChange={this.handleCountryChange} />

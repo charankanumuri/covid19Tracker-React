@@ -5,6 +5,7 @@ import { fetchData } from "../src/api";
 import coronaImage from "./images/coronaImage.png";
 import { DataStore } from "@aws-amplify/datastore";
 import { CovidReport } from "./models";
+import Authenticator from "./components/Authenticator";
 
 class App extends Component {
   state = {
@@ -46,6 +47,7 @@ class App extends Component {
     const { data, country } = this.state;
     return (
       <div className={styles.container}>
+        <Authenticator />
         <img className={styles.image} src={coronaImage} alt="COVID-19" />
         <Cards data={data} />
         <CountryPicker handleCountryChange={this.handleCountryChange} />

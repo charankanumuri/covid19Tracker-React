@@ -1,0 +1,9 @@
+type CovidReport @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Recovered: Int
+  Infected: Int
+  Died: Int
+  Country: String
+  lastUpdatedAt: AWSDateTime
+}
+ 

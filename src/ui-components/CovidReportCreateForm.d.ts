@@ -13,27 +13,24 @@ export declare type ValidationResponse = {
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type CovidReportCreateFormInputValues = {
-    Recovered?: number;
-    Infected?: number;
-    Died?: number;
     Country?: string;
-    lastUpdatedAt?: string;
+    Died?: number;
+    Infected?: number;
+    Recovered?: number;
 };
 export declare type CovidReportCreateFormValidationValues = {
-    Recovered?: ValidationFunction<number>;
-    Infected?: ValidationFunction<number>;
-    Died?: ValidationFunction<number>;
     Country?: ValidationFunction<string>;
-    lastUpdatedAt?: ValidationFunction<string>;
+    Died?: ValidationFunction<number>;
+    Infected?: ValidationFunction<number>;
+    Recovered?: ValidationFunction<number>;
 };
 export declare type FormProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type CovidReportCreateFormOverridesProps = {
     CovidReportCreateFormGrid?: FormProps<GridProps>;
-    Recovered?: FormProps<TextFieldProps>;
-    Infected?: FormProps<TextFieldProps>;
-    Died?: FormProps<TextFieldProps>;
     Country?: FormProps<TextFieldProps>;
-    lastUpdatedAt?: FormProps<TextFieldProps>;
+    Died?: FormProps<TextFieldProps>;
+    Infected?: FormProps<TextFieldProps>;
+    Recovered?: FormProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type CovidReportCreateFormProps = React.PropsWithChildren<{
     overrides?: CovidReportCreateFormOverridesProps | undefined | null;

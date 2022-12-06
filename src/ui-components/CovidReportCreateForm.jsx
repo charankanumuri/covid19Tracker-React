@@ -24,34 +24,28 @@ export default function CovidReportCreateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    Recovered: undefined,
-    Infected: undefined,
-    Died: undefined,
     Country: undefined,
-    lastUpdatedAt: undefined,
+    Died: undefined,
+    Infected: undefined,
+    Recovered: undefined,
   };
-  const [Recovered, setRecovered] = React.useState(initialValues.Recovered);
-  const [Infected, setInfected] = React.useState(initialValues.Infected);
-  const [Died, setDied] = React.useState(initialValues.Died);
   const [Country, setCountry] = React.useState(initialValues.Country);
-  const [lastUpdatedAt, setLastUpdatedAt] = React.useState(
-    initialValues.lastUpdatedAt
-  );
+  const [Died, setDied] = React.useState(initialValues.Died);
+  const [Infected, setInfected] = React.useState(initialValues.Infected);
+  const [Recovered, setRecovered] = React.useState(initialValues.Recovered);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setRecovered(initialValues.Recovered);
-    setInfected(initialValues.Infected);
-    setDied(initialValues.Died);
     setCountry(initialValues.Country);
-    setLastUpdatedAt(initialValues.lastUpdatedAt);
+    setDied(initialValues.Died);
+    setInfected(initialValues.Infected);
+    setRecovered(initialValues.Recovered);
     setErrors({});
   };
   const validations = {
-    Recovered: [],
-    Infected: [],
+    Country: [{ type: "Required" }],
     Died: [],
-    Country: [],
-    lastUpdatedAt: [],
+    Infected: [],
+    Recovered: [],
   };
   const runValidationTasks = async (fieldName, value) => {
     let validationResponse = validateField(value, validations[fieldName]);
@@ -71,11 +65,10 @@ export default function CovidReportCreateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          Recovered,
-          Infected,
-          Died,
           Country,
-          lastUpdatedAt,
+          Died,
+          Infected,
+          Recovered,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -117,76 +110,30 @@ export default function CovidReportCreateForm(props) {
       {...getOverrideProps(overrides, "CovidReportCreateForm")}
     >
       <TextField
-        label="Recovered"
-        isRequired={false}
+        label="Country"
+        isRequired={true}
         isReadOnly={false}
-        type="number"
-        step="any"
         onChange={(e) => {
-          let value = parseInt(e.target.value);
-          if (isNaN(value)) {
-            setErrors((errors) => ({
-              ...errors,
-              Recovered: "Value must be a valid number",
-            }));
-            return;
-          }
+          let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              Recovered: value,
+              Country: value,
+              Died,
               Infected,
-              Died,
-              Country,
-              lastUpdatedAt,
-            };
-            const result = onChange(modelFields);
-            value = result?.Recovered ?? value;
-          }
-          if (errors.Recovered?.hasError) {
-            runValidationTasks("Recovered", value);
-          }
-          setRecovered(value);
-        }}
-        onBlur={() => runValidationTasks("Recovered", Recovered)}
-        errorMessage={errors.Recovered?.errorMessage}
-        hasError={errors.Recovered?.hasError}
-        {...getOverrideProps(overrides, "Recovered")}
-      ></TextField>
-      <TextField
-        label="Infected"
-        isRequired={false}
-        isReadOnly={false}
-        type="number"
-        step="any"
-        onChange={(e) => {
-          let value = parseInt(e.target.value);
-          if (isNaN(value)) {
-            setErrors((errors) => ({
-              ...errors,
-              Infected: "Value must be a valid number",
-            }));
-            return;
-          }
-          if (onChange) {
-            const modelFields = {
               Recovered,
-              Infected: value,
-              Died,
-              Country,
-              lastUpdatedAt,
             };
             const result = onChange(modelFields);
-            value = result?.Infected ?? value;
+            value = result?.Country ?? value;
           }
-          if (errors.Infected?.hasError) {
-            runValidationTasks("Infected", value);
+          if (errors.Country?.hasError) {
+            runValidationTasks("Country", value);
           }
-          setInfected(value);
+          setCountry(value);
         }}
-        onBlur={() => runValidationTasks("Infected", Infected)}
-        errorMessage={errors.Infected?.errorMessage}
-        hasError={errors.Infected?.hasError}
-        {...getOverrideProps(overrides, "Infected")}
+        onBlur={() => runValidationTasks("Country", Country)}
+        errorMessage={errors.Country?.errorMessage}
+        hasError={errors.Country?.hasError}
+        {...getOverrideProps(overrides, "Country")}
       ></TextField>
       <TextField
         label="Died"
@@ -205,11 +152,10 @@ export default function CovidReportCreateForm(props) {
           }
           if (onChange) {
             const modelFields = {
-              Recovered,
-              Infected,
-              Died: value,
               Country,
-              lastUpdatedAt,
+              Died: value,
+              Infected,
+              Recovered,
             };
             const result = onChange(modelFields);
             value = result?.Died ?? value;
@@ -225,59 +171,74 @@ export default function CovidReportCreateForm(props) {
         {...getOverrideProps(overrides, "Died")}
       ></TextField>
       <TextField
-        label="Country"
+        label="Infected"
         isRequired={false}
         isReadOnly={false}
+        type="number"
+        step="any"
         onChange={(e) => {
-          let { value } = e.target;
+          let value = parseInt(e.target.value);
+          if (isNaN(value)) {
+            setErrors((errors) => ({
+              ...errors,
+              Infected: "Value must be a valid number",
+            }));
+            return;
+          }
           if (onChange) {
             const modelFields = {
-              Recovered,
-              Infected,
+              Country,
               Died,
-              Country: value,
-              lastUpdatedAt,
+              Infected: value,
+              Recovered,
             };
             const result = onChange(modelFields);
-            value = result?.Country ?? value;
+            value = result?.Infected ?? value;
           }
-          if (errors.Country?.hasError) {
-            runValidationTasks("Country", value);
+          if (errors.Infected?.hasError) {
+            runValidationTasks("Infected", value);
           }
-          setCountry(value);
+          setInfected(value);
         }}
-        onBlur={() => runValidationTasks("Country", Country)}
-        errorMessage={errors.Country?.errorMessage}
-        hasError={errors.Country?.hasError}
-        {...getOverrideProps(overrides, "Country")}
+        onBlur={() => runValidationTasks("Infected", Infected)}
+        errorMessage={errors.Infected?.errorMessage}
+        hasError={errors.Infected?.hasError}
+        {...getOverrideProps(overrides, "Infected")}
       ></TextField>
       <TextField
-        label="Last updated at"
+        label="Recovered"
         isRequired={false}
         isReadOnly={false}
-        type="datetime-local"
+        type="number"
+        step="any"
         onChange={(e) => {
-          let { value } = e.target;
+          let value = parseInt(e.target.value);
+          if (isNaN(value)) {
+            setErrors((errors) => ({
+              ...errors,
+              Recovered: "Value must be a valid number",
+            }));
+            return;
+          }
           if (onChange) {
             const modelFields = {
-              Recovered,
-              Infected,
-              Died,
               Country,
-              lastUpdatedAt: value,
+              Died,
+              Infected,
+              Recovered: value,
             };
             const result = onChange(modelFields);
-            value = result?.lastUpdatedAt ?? value;
+            value = result?.Recovered ?? value;
           }
-          if (errors.lastUpdatedAt?.hasError) {
-            runValidationTasks("lastUpdatedAt", value);
+          if (errors.Recovered?.hasError) {
+            runValidationTasks("Recovered", value);
           }
-          setLastUpdatedAt(new Date(value).toISOString());
+          setRecovered(value);
         }}
-        onBlur={() => runValidationTasks("lastUpdatedAt", lastUpdatedAt)}
-        errorMessage={errors.lastUpdatedAt?.errorMessage}
-        hasError={errors.lastUpdatedAt?.hasError}
-        {...getOverrideProps(overrides, "lastUpdatedAt")}
+        onBlur={() => runValidationTasks("Recovered", Recovered)}
+        errorMessage={errors.Recovered?.errorMessage}
+        hasError={errors.Recovered?.hasError}
+        {...getOverrideProps(overrides, "Recovered")}
       ></TextField>
       <Flex
         justifyContent="space-between"

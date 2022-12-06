@@ -12,11 +12,10 @@ type EagerCovidReport = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly Recovered?: number | null;
-  readonly Infected?: number | null;
+  readonly Country: string;
   readonly Died?: number | null;
-  readonly Country?: string | null;
-  readonly lastUpdatedAt?: string | null;
+  readonly Infected?: number | null;
+  readonly Recovered?: number | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -27,11 +26,10 @@ type LazyCovidReport = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly Recovered?: number | null;
-  readonly Infected?: number | null;
+  readonly Country: string;
   readonly Died?: number | null;
-  readonly Country?: string | null;
-  readonly lastUpdatedAt?: string | null;
+  readonly Infected?: number | null;
+  readonly Recovered?: number | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

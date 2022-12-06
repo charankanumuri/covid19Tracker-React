@@ -10,8 +10,15 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "Recovered": {
-                    "name": "Recovered",
+                "Country": {
+                    "name": "Country",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "Died": {
+                    "name": "Died",
                     "isArray": false,
                     "type": "Int",
                     "isRequired": false,
@@ -24,24 +31,10 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "Died": {
-                    "name": "Died",
+                "Recovered": {
+                    "name": "Recovered",
                     "isArray": false,
                     "type": "Int",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "Country": {
-                    "name": "Country",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "lastUpdatedAt": {
-                    "name": "lastUpdatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -91,5 +84,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.2",
-    "version": "80aab7f4cea6530421768ec16ae14094"
+    "version": "f659b7cd7044fcdd58e195e1d5524a34"
 };

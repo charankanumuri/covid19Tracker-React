@@ -6,18 +6,6 @@ import coronaImage from "./images/coronaImage.png";
 import { DataStore } from "@aws-amplify/datastore";
 import { CovidReport } from "./models";
 
-async(
-  await DataStore.save(
-    new CovidReport({
-      Recovered: 1020,
-      Infected: 1020,
-      Died: 1020,
-      Country: "Lorem ipsum dolor sit amet",
-      lastUpdatedAt: "1970-01-01T12:30:23.999Z",
-    })
-  )
-);
-
 class App extends Component {
   state = {
     data: {},
@@ -29,6 +17,19 @@ class App extends Component {
     this.setState({
       data: fetchedData,
     });
+  }
+
+  async dataseed() {
+    const data = await DataStore.save(
+      new CovidReport({
+        Recovered: 1020,
+        Infected: 1020,
+        Died: 1020,
+        Country: "Lorem ipsum dolor sit amet",
+        lastUpdatedAt: "1970-01-01T12:30:23.999Z",
+      })
+    );
+    return data;
   }
 
   handleCountryChange = async (country) => {

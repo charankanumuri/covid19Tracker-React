@@ -13,6 +13,7 @@ function App({ signOut, user }) {
       <Toolbar>
         <Box display="flex" flexGrow={1}>
           <h2>Welcome {user.username}</h2>
+          <h3>Wear a Mask to save the risk!</h3>
         </Box>
         <button alignItems="right" onClick={signOut}>
           Sign out

@@ -3,7 +3,7 @@
   "cognitoConfig": {
     "identityPoolName": "testAuthIdentityPool",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "covid12a7d82aa",
+    "resourceNameTruncated": "covid1cad6729f",
     "userPoolName": "covid19TrackerReact",
     "autoVerifiedAttributes": [
       "email"
@@ -25,17 +25,16 @@
       "Requires Uppercase"
     ],
     "requiredAttributes": [
-      "email",
-      "preferred_username"
+      "email"
     ],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
-    "userpoolClientLambdaRole": "covid12a7d82aa_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "covid1cad6729f_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "2a7d82aa",
+    "sharedId": "cad6729f",
     "resourceName": "covid19TrackerReact",
     "authSelections": "identityPoolAndUserPool",
     "serviceName": "Cognito",

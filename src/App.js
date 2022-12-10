@@ -24,7 +24,7 @@ class App extends Component {
     });
   }
 
-  dataseed = async (Recovered, Infected, Died, Country, lastUpdatedAt) => {
+  dataseed = async (Recovered, Infected, Died, Country) => {
     // console.log(Country);
     const data = await DataStore.save(
       new CovidReport({
@@ -32,7 +32,6 @@ class App extends Component {
         Infected,
         Died,
         Country,
-        lastUpdatedAt,
       })
     );
     return data;
@@ -51,8 +50,7 @@ class App extends Component {
       fetchCountryData.recovered.value,
       fetchCountryData.confirmed.value,
       fetchCountryData.deaths.value,
-      country,
-      fetchCountryData.lastUpdate
+      country
     );
   };
 

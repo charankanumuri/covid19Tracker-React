@@ -1,48 +1,51 @@
-import axios from 'axios';
+import axios from "axios";
 
-const url = 'https://covid19.mathdro.id/api';
+export const fetchData = async () => {
+  let dynamicUrl = `https://api.covidtracking.com/v1/us/20210307.json`;
+  try {
+    const {
+      data: { positive, negative, death, lastModified },
+    } = await axios.get(dynamicUrl);
 
-export const fetchData = async (country) => {
-	let dynamicUrl = url;
-	if (country) {
-		dynamicUrl = `${url}/countries/${country}`;
-	}
-	try {
-		const { data: { confirmed, recovered, deaths, lastUpdate } } = await axios.get(dynamicUrl);
-
-		const modifiedData = {
-			confirmed,
-			recovered,
-			deaths,
-			lastUpdate
-		};
-		return modifiedData;
-	} catch (error) {
-		console.log(error);
-	}
+    console.log(positive, negative, death, lastModified);
+    const modifiedData = {
+      positive,
+      negative,
+      death,
+      lastModified,
+    };
+    return modifiedData;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const fetchDailyData = async () => {
-	try {
-		const { data } = await axios.get(`${url}/daily`);
-		//console.log(data);
-		const obtainedData = data.map((dailyData) => ({
-			confirmed: dailyData.confirmed.total,
-			deaths: dailyData.deaths.total,
-			date: dailyData.reportDate
-		}));
-		return obtainedData;
-	} catch (error) {
-		console.log(error);
-	}
+  try {
+    const { data } = await axios.get(
+      `https://api.covidtracking.com/v1/us/daily.json`
+    );
+    // console.log(data);
+    const obtainedData = data.map((dailyData) => ({
+      positive: dailyData.positive,
+      negative: dailyData.negative,
+      death: dailyData.death,
+      date: dailyData.lastModified,
+    }));
+    return obtainedData;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const fetchCountries = async () => {
-	try {
-		const { data: { countries } } = await axios.get(`${url}/countries`);
-		//console.log(response);
-		return countries.map((country) => country.name);
-	} catch (error) {
-		console.log(error);
-	}
+  try {
+    const res = await axios.get(
+      `https://api.covidtracking.com/v1/states/info.json`
+    );
+    // console.log(res.data);
+    return res.data.map((country) => country.state);
+  } catch (error) {
+    console.log(error);
+  }
 };

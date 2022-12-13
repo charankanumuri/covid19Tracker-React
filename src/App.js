@@ -39,7 +39,7 @@ class App extends Component {
 
   handleCountryChange = async (country) => {
     //console.log(country)
-    const fetchCountryData = await fetchData(country);
+    const fetchCountryData = await fetchData();
     //console.log(fetchCountryData)
     this.setState({
       data: fetchCountryData,
@@ -47,9 +47,9 @@ class App extends Component {
     });
 
     this.dataseed(
-      fetchCountryData.recovered.value,
-      fetchCountryData.confirmed.value,
-      fetchCountryData.deaths.value,
+      fetchCountryData.negative,
+      fetchCountryData.positive,
+      fetchCountryData.death,
       country
     );
   };

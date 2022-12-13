@@ -4,10 +4,8 @@ import CountUp from "react-countup";
 import styles from "./cards.module.css";
 import cx from "classnames";
 
-const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
-  if (!confirmed) {
-    return "Loading....";
-  }
+const Cards = ({ data: { positive, negative, death, lastModified } }) => {
+  console.log(positive, negative, death);
   return (
     <div className={styles.container}>
       <Grid container spacing={3} justify="center">
@@ -23,15 +21,10 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
               Infected
             </Typography>
             <Typography variant="h5">
-              <CountUp
-                start={0}
-                end={confirmed.value}
-                duration={2.5}
-                separator=","
-              />
+              <CountUp start={0} end={28756489} duration={2.5} separator="," />
             </Typography>
             <Typography color="textSecondary">
-              {new Date(lastUpdate).toDateString()}
+              {new Date(lastModified).toDateString()}
             </Typography>
             <Typography variant="body2">
               Active Covid-19 confirmed count
@@ -50,15 +43,10 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
               Recovered
             </Typography>
             <Typography variant="h5">
-              <CountUp
-                start={0}
-                end={recovered.value}
-                duration={2.5}
-                separator=","
-              />
+              <CountUp start={0} end={74582825} duration={2.5} separator="," />
             </Typography>
             <Typography color="textSecondary">
-              {new Date(lastUpdate).toDateString()}
+              {new Date(lastModified).toDateString()}
             </Typography>
             <Typography variant="body2">Covid-19 Recovered count</Typography>
           </CardContent>
@@ -75,15 +63,10 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
               Deaths
             </Typography>
             <Typography variant="h5">
-              <CountUp
-                start={0}
-                end={deaths.value}
-                duration={2.5}
-                separator=","
-              />
+              <CountUp start={0} end={515151} duration={2.5} separator="," />
             </Typography>
             <Typography color="textSecondary">
-              {new Date(lastUpdate).toDateString()}
+              {new Date(lastModified).toDateString()}
             </Typography>
             <Typography variant="body2">
               No. of Deaths caused by Covid-19
